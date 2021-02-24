@@ -7,6 +7,7 @@ class MultiLineText extends StatelessWidget {
   final FontWeight fontWeight;
   final double fontSize;
   final int maxLine;
+  final TextAlign align;
   MultiLineText(
     this.text, {
     Key key,
@@ -14,6 +15,7 @@ class MultiLineText extends StatelessWidget {
     this.fontWeight,
     this.fontSize,
     this.maxLine,
+    this.align,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,8 @@ class MultiLineText extends StatelessWidget {
         fontSize: fontSize ?? primaryFontSize,
       ),
       maxLines: maxLine,
+      textAlign: align,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

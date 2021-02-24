@@ -1,5 +1,7 @@
+import 'package:busTransport/components/components.dart';
 import 'package:busTransport/uitls/metaData.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -27,16 +29,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       titleSpacing: 0,
       leading: isBack
-          ? SizedBox()
+          ? InkWell(
+              onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                Get.back();
+              },
+              child: Icon(Icons.arrow_back),
+            )
           : InkWell(
               onTap: () {
-                FocusScope.of(context).unfocus();
+                FocusScope.of(context).requestFocus(new FocusNode());
                 Scaffold.of(context).openDrawer();
               },
               child: Icon(
                 Icons.menu,
               ),
             ),
+      title: SingleLineText(
+        title ?? "",
+        fontSize: 20.0,
+      ),
     );
   }
 }

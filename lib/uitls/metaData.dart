@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// BASEURL
+const String apiUrl = "https://bus-transport-backend.herokuapp.com";
+
 // TEXT
 const String appTitle = "Noth Eastern Hill University";
 const String appName = "Bus Transport";

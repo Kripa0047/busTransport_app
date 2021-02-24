@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:busTransport/pages/Dashboard/dashboard.dart';
+import 'package:busTransport/pages/splash/splashController.dart';
 import 'package:busTransport/uitls/metaData.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +10,8 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  final SplashController splashController = SplashController();
+
   @override
   void initState() {
     super.initState();
@@ -19,9 +21,7 @@ class _SplashState extends State<Splash> {
   void _initilize() {
     Timer(
       Duration(seconds: 2),
-      () => Get.offAll(
-        () => Dashboard(),
-      ),
+      () => splashController.decide(),
     );
   }
 

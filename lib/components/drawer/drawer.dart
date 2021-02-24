@@ -1,46 +1,18 @@
+import 'package:busTransport/controllers/global/storageController.dart';
+import 'package:busTransport/pages/Admin/Login/login.dart';
+import 'package:busTransport/pages/Admin/Login/loginController.dart';
+import 'package:busTransport/pages/Dashboard/dashboard.dart';
+import 'package:busTransport/pages/Location/location.dart';
+import 'package:busTransport/pages/ManageBus/manageBus.dart';
 import 'package:busTransport/uitls/metaData.dart';
 import 'package:flutter/material.dart';
 import 'package:busTransport/components/components.dart';
+import 'package:get/get.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
     Key key,
   }) : super(key: key);
-
-  Widget _buildCredit() {
-    return Container(
-      width: double.maxFinite,
-      padding: EdgeInsets.all(5),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          MultiLineText(
-            "Made with ",
-            color: Colors.blue[200],
-            fontSize: secondaryFontSize,
-            fontWeight: secondaryFontWeight,
-          ),
-          Icon(
-            Icons.favorite,
-            color: Colors.red[200],
-            size: 18,
-          ),
-          MultiLineText(
-            " and ",
-            color: Colors.blue[200],
-            fontSize: secondaryFontSize,
-            fontWeight: secondaryFontWeight,
-          ),
-          Icon(
-            Icons.code,
-            color: Colors.green[200],
-            size: 18,
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buidDrawerItem({
     String title,
@@ -101,23 +73,73 @@ class CustomDrawer extends StatelessWidget {
                   _buidDrawerItem(
                     title: "Home",
                     icon: Icons.home,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Get.offAll(
+                        () => Dashboard(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
                   ),
                   _buidDrawerItem(
                     title: "Buses",
                     icon: Icons.commute,
                     onTap: () {},
                   ),
-                  _buidDrawerItem(
-                    title: "Admin",
-                    icon: Icons.supervised_user_circle_rounded,
-                    onTap: () {},
-                  ),
+                  Obx(() {
+                    return Get.find<StorageController>().isAdmin.value
+                        ? Column(
+                            children: [
+                              _buidDrawerItem(
+                                title: "Add Location",
+                                icon: Icons.add_location_alt_rounded,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Get.offAll(
+                                    () => Location(),
+                                    transition: Transition.rightToLeft,
+                                  );
+                                },
+                              ),
+                              _buidDrawerItem(
+                                title: "Add Bus",
+                                icon: Icons.add_road_rounded,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Get.offAll(
+                                    () => ManageBus(),
+                                    transition: Transition.rightToLeft,
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                        : _buidDrawerItem(
+                            title: "Admin Login",
+                            icon: Icons.supervised_user_circle_rounded,
+                            onTap: () {
+                              Navigator.pop(context);
+                              Get.offAll(
+                                () => Login(),
+                                transition: Transition.rightToLeft,
+                              );
+                            },
+                          );
+                  }),
                 ],
               ),
             ),
           ),
-          _buildCredit(),
+          Get.find<StorageController>().isAdmin.value
+              ? _buidDrawerItem(
+                  title: "Logout",
+                  icon: Icons.logout,
+                  onTap: () {
+                    Navigator.pop(context);
+                    LoginController().logout();
+                  },
+                )
+              : SizedBox(),
         ],
       ),
     );
