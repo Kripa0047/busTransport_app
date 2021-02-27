@@ -1,4 +1,6 @@
 import 'package:busTransport/components/components.dart';
+import 'package:busTransport/controllers/global/storageController.dart';
+import 'package:busTransport/pages/BusDetails/busDetails.dart';
 import 'package:busTransport/pages/ManageBus/manageBusController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,6 +62,17 @@ class _ManageBusState extends State<ManageBus> {
           ..._manageBusController.buses.value.reversed?.map(
             (bus) => BusCard(
               bus,
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                Get.to(
+                  () => BusDetails(
+                    bus.id,
+                    _manageBusController,
+                    isAdmin: Get.find<StorageController>().isAdmin.value,
+                  ),
+                  transition: Transition.rightToLeft,
+                );
+              },
               onDelete: () {
                 FocusScope.of(context).unfocus();
                 _manageBusController.deleteBus(bus);

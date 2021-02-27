@@ -41,7 +41,7 @@ class LoginController extends GetxController {
         Get.find<StorageController>().isAdmin.value = true;
         Get.offAll(
           () => Dashboard(),
-          transition: Transition.rightToLeft,
+          transition: Transition.fade,
         );
       } else {
         Alert.show(res['message'], false);
@@ -61,7 +61,7 @@ class LoginController extends GetxController {
       if (res) {
         Get.offAll(
           () => Dashboard(),
-          transition: Transition.rightToLeft,
+          transition: Transition.fade,
         );
       }
     } catch (e) {

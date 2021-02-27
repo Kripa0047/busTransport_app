@@ -1,6 +1,7 @@
 import 'package:busTransport/controllers/global/storageController.dart';
 import 'package:busTransport/pages/Admin/Login/login.dart';
 import 'package:busTransport/pages/Admin/Login/loginController.dart';
+import 'package:busTransport/pages/AllBus/allBus.dart';
 import 'package:busTransport/pages/Dashboard/dashboard.dart';
 import 'package:busTransport/pages/Location/location.dart';
 import 'package:busTransport/pages/ManageBus/manageBus.dart';
@@ -77,14 +78,20 @@ class CustomDrawer extends StatelessWidget {
                       Navigator.pop(context);
                       Get.offAll(
                         () => Dashboard(),
-                        transition: Transition.rightToLeft,
+                        transition: Transition.fade,
                       );
                     },
                   ),
                   _buidDrawerItem(
                     title: "Buses",
                     icon: Icons.commute,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Get.offAll(
+                        () => AllBus(),
+                        transition: Transition.fade,
+                      );
+                    },
                   ),
                   Obx(() {
                     return Get.find<StorageController>().isAdmin.value
@@ -97,7 +104,7 @@ class CustomDrawer extends StatelessWidget {
                                   Navigator.pop(context);
                                   Get.offAll(
                                     () => Location(),
-                                    transition: Transition.rightToLeft,
+                                    transition: Transition.fade,
                                   );
                                 },
                               ),
@@ -108,7 +115,7 @@ class CustomDrawer extends StatelessWidget {
                                   Navigator.pop(context);
                                   Get.offAll(
                                     () => ManageBus(),
-                                    transition: Transition.rightToLeft,
+                                    transition: Transition.fade,
                                   );
                                 },
                               ),
@@ -119,7 +126,7 @@ class CustomDrawer extends StatelessWidget {
                             icon: Icons.supervised_user_circle_rounded,
                             onTap: () {
                               Navigator.pop(context);
-                              Get.offAll(
+                              Get.to(
                                 () => Login(),
                                 transition: Transition.rightToLeft,
                               );

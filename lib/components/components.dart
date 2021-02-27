@@ -8,4 +8,5 @@ export 'package:busTransport/components/buttons/CustomRaiseButton.dart';
 export 'package:busTransport/components/loader/loader.dart';
 export 'package:busTransport/components/Alert/alert.dart';
 export 'package:busTransport/components/Cards/BusCard.dart';
+export 'package:busTransport/components/Cards/stopCard.dart';
 export 'package:busTransport/components/buttons/CustomBorderButton.dart';
